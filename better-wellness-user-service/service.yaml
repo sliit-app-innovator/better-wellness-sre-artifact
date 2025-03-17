@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: better-wellness-user-service
+  namespace: better-wellness
+spec:
+  selector:
+    app: better-wellness-user-service
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

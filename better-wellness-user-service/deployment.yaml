@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: better-wellness-user-deployment
+  namespace: better-wellness
+  labels:
+    app: better-wellness-user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: better-wellness-user-service
+  template:
+    metadata:
+      labels:
+        app: better-wellness-user-service
+    spec:
+      containers:
+        - name: better-wellness-user-container
+          image: your-dockerhub-username/better-wellness-user-service:latest  # Replace with your actual image path
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
