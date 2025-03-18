@@ -1,13 +1,13 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: better-wellness-user-hpa
+  name: better-wellness-booking-hpa
   namespace: better-wellness
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: better-wellness-user-deployment
+    name: better-wellness-booking-deployment
   minReplicas: 1
   maxReplicas: 3
   metrics:

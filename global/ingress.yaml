@@ -20,13 +20,13 @@ spec:
                   number: 80
 
           # Example: Add other microservices
-          # - path: /auth-service/?(.*)
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: better-wellness-auth-service
-          #       port:
-          #         number: 80
+          - path: /better-wellness/booking/?(.*)
+            pathType: Prefix
+            backend:
+               service:
+                 name: better-wellness-auth-service
+                 port:
+                   number: 80
 
           # - path: /messaging-service/?(.*)
           #   pathType: Prefix
