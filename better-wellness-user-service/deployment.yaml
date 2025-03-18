@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: better-wellness-user-container
-          image: your-dockerhub-username/better-wellness-user-service:latest  # Replace with your actual image path
+          image: 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com/better-wellness-repo:better-wellness-user-service
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -43,3 +43,5 @@ spec:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 5
+      imagePullSecrets:
+        - name: regcred
