@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: better-wellness-booking-deployment
+  name: better-wellness-user-deployment
   namespace: better-wellness
   labels:
-    app: better-wellness-booking-service
+    app: better-wellness-user-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: better-wellness-booking-service
+      app: better-wellness-user-service
   template:
     metadata:
       labels:
-        app: better-wellness-booking-service
+        app: better-wellness-user-service
     spec:
       containers:
-        - name: better-wellness-booking-container
-          image: 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com/better-wellness-repo:better-wellness-booking-service
+        - name: better-wellness-user-container
+          image: 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com/better-wellness-repo:better-wellness-user-service
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
