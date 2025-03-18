@@ -14,6 +14,10 @@ C:\Users\LENOVO>aws ecr get-login-password --region ap-southeast-1 | docker logi
 Login Succeeded
 
 
+aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com
+
+
+
 
 kubectl create secret docker-registry regcred `
   --docker-server=061039760516.dkr.ecr.ap-southeast-1.amazonaws.com `
