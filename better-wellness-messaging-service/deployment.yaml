@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: better-wellness-user-deployment
+  name: better-wellness-messaging-deployment
   namespace: better-wellness
   labels:
-    app: better-wellness-user-service
+    app: better-wellness-messaging-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: better-wellness-user-service
+      app: better-wellness-messaging-service
   template:
     metadata:
       labels:
-        app: better-wellness-user-service
+        app: better-wellness-messaging-service
     spec:
       containers:
-        - name: better-wellness-user-container
-          image: 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com/better-wellness-repo:better-wellness-user-service
+        - name: better-wellness-messaging-container
+          image: 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com/better-wellness-repo:better-wellness-messaging-service
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

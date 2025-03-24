@@ -4,14 +4,22 @@ metadata:
   name: better-wellness-ingress
   namespace: better-wellness
   annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx  # Ensure class is specified (esp. for Minikube)
   rules:
-    - host: betterwellness.local        # Replace with your actual domain or testing domain
+    - host: better-wellness.local
       http:
         paths:
-          - path: /better-wellness/user/?(.*)
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: better-wellness-web-app-service
+                port:
+                  number: 80
+
+          - path: /better-wellness/user
             pathType: Prefix
             backend:
               service:
@@ -19,19 +27,18 @@ spec:
                 port:
                   number: 80
 
-          # Example: Add other microservices
-          - path: /better-wellness/booking/?(.*)
+          - path: /better-wellness/booking
             pathType: Prefix
             backend:
-               service:
-                 name: better-wellness-auth-service
-                 port:
-                   number: 80
+              service:
+                name: better-wellness-booking-service
+                port:
+                  number: 80
 
-          # - path: /messaging-service/?(.*)
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: better-wellness-messaging-service
-          #       port:
-          #         number: 80
+          - path: /api/chat
+            pathType: Prefix
+            backend:
+              service:
+                name: better-wellness-messaging-service
+                port:
+                  number: 80
