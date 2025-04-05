@@ -1,25 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: better-wellness-ingress
+  name: better-wellness-api-ingress
   namespace: better-wellness
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2  # Rewrite path to preserve the dynamic part
+    nginx.ingress.kubernetes.io/affinity: "true"  # Optional: to ensure traffic is sticky to the same pod
 spec:
-  ingressClassName: nginx  # Ensure class is specified (esp. for Minikube)
+  ingressClassName: nginx
   rules:
-    - host: better-wellness.local
+    - host: api.better-wellness.local  # Different subdomain for APIs
       http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: better-wellness-web-app-service
-                port:
-                  number: 80
-
           - path: /better-wellness/user
             pathType: Prefix
             backend:
@@ -28,8 +21,8 @@ spec:
                 port:
                   number: 80
 
-          - path: /better-wellness/booking
-            pathType: Prefix
+          - path: /better-wellness/booking(/|$)(.*)
+            pathType: ImplementationSpecific  # Use regular expressions to match dynamic paths
             backend:
               service:
                 name: better-wellness-booking-service

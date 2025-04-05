@@ -34,4 +34,30 @@ docker tag better-wellness-webapp:latest 061039760516.dkr.ecr.ap-southeast-1.ama
 docker push 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com/better-wellness-repo:better-wellness-webapp
 
 //user powershell
+kubectl delete secret ecr-regcred -n better-wellness
+
 aws ecr get-login-password --region ap-southeast-1 | kubectl create secret docker-registry ecr-regcred --docker-server=061039760516.dkr.ecr.ap-southeast-1.amazonaws.com --docker-username=AWS --docker-password="$(aws ecr get-login-password --region ap-southeast-1)" -n better-wellness
+
+
+
+
+kubectl edit svc ingress-nginx-controller -n ingress-nginx
+
+
+kubectl delete ingress --all -A
+kubectl delete svc ingress-nginx-controller -n ingress-nginx
+kubectl delete namespace ingress-nginx
+kubectl get ingress -A
+
+minikube addons enable ingress
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+kubectl get pods -n ingress-nginx
+kubectl edit svc ingress-nginx-controller -n ingress-nginx  // set loadbalancer type
+kubectl get svc -n ingress-nginx
+
+minikube tunnel
+
+kubectl apply -f .\ingress.yaml   /apply custom file
+kubectl get ingress -n better-wellness
+	
