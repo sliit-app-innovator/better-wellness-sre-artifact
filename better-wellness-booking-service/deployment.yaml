@@ -50,6 +50,6 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: user-service-config
+            name: booking-service-config
       imagePullSecrets:
         - name: ecr-regcred
