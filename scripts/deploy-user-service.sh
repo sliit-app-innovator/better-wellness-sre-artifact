@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# File paths
-CONFIG_FILE="./application.properties"
-DEPLOYMENT_FILE="./deployment.yaml"
-SERVICE_FILE="./service.yaml"
+CONFIG_DIR="/home/ec2-user/better-wellness-sre-artifact/better-wellness-user-service"
+CONFIG_FILE="${CONFIG_DIR}/application.properties"
+DEPLOYMENT_FILE="${CONFIG_DIR}/deployment.yaml"
+SERVICE_FILE="${CONFIG_DIR}/service.yaml"
 NAMESPACE="better-wellness"
 
 echo "📦 Creating or updating ConfigMap..."
