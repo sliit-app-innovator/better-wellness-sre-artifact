@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: user-service-config
+  name: booking-service-config
   namespace: better-wellness
 data:
   application.properties: |
