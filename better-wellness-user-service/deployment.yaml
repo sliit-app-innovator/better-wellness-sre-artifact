@@ -45,7 +45,8 @@ spec:
             periodSeconds: 5
           volumeMounts:
             - name: config-volume
-              mountPath: /app
+              mountPath: /app/application.properties
+              subPath: application.properties
       volumes:
         - name: config-volume
           configMap:
