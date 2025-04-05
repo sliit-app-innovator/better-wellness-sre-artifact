@@ -1,8 +1,9 @@
 #!/bin/bash
 
 BASE_PATH="/home/ec2-user/better-wellness-sre-artifact"
+SCRIPTS_PATH="$BASE_PATH/scripts"
 
-echo "🔧 Creating namespace..."
+echo "🔧 Initiating deployment namespace..."
 kubectl apply -f $BASE_PATH/global/namespace.yaml
 
 echo "🔐 Creating image pull secret (if needed)..."
@@ -12,19 +13,19 @@ echo "🐘 Deploying Redis..."
 kubectl apply -f $BASE_PATH/redis-service/
 
 echo "🧠 Deploying User Service..."
-kubectl apply -f $BASE_PATH/better-wellness-user-service/
+bash $SCRIPTS_PATH/deploy-user-service.sh
 
 echo "📅 Deploying Booking Service..."
-kubectl apply -f $BASE_PATH/better-wellness-booking-service/
+bash $SCRIPTS_PATH/deploy-booking-service.sh
 
 echo "💬 Deploying Messaging Service..."
-kubectl apply -f $BASE_PATH/better-wellness-messaging-service/
+bash $SCRIPTS_PATH/deploy-messaging-service.sh
 
-echo "🌐 Deploying Web App..."
-kubectl apply -f $BASE_PATH/better-wellness-web-app/
+#echo "🌐 Deploying Web App..."
+#bash $SCRIPTS_PATH/deploy-web-app.sh
 
-echo "🚪 Setting up Ingress..."
-kubectl apply -f $BASE_PATH/global/ingress.yaml
-kubectl apply -f $BASE_PATH/global/ingress-api.yaml
+# echo "🚪 Applying Ingress..."
+# kubectl apply -f $BASE_PATH/global/ingress.yaml
+# kubectl apply -f $BASE_PATH/global/ingress-api.yaml
 
 echo "✅ All components deployed!"
