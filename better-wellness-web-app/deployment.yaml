@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: better-wellness-web-app-container
-          image: 061039760516.dkr.ecr.ap-south-1.amazonaws.com//better-wellness-repo:better-wellness-webappv1
+          image: 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-webappv1
           ports:
             - containerPort: 80    # <- CHANGE here
       imagePullSecrets:
