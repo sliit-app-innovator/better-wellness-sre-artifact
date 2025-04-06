@@ -4,10 +4,9 @@ metadata:
   name: better-wellness-web-app-service
   namespace: better-wellness
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: better-wellness-web-app
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30080
