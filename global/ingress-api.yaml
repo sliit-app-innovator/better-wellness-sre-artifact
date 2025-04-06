@@ -14,7 +14,7 @@ spec:
       http:
         paths:
           - path: /better-wellness/user(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: better-wellness-user-service
@@ -22,7 +22,7 @@ spec:
                   number: 80
 
           - path: /better-wellness/booking(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: better-wellness-booking-service
@@ -30,7 +30,7 @@ spec:
                   number: 80
 
           - path: /api/chat(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: better-wellness-messaging-service
@@ -38,7 +38,7 @@ spec:
                   number: 80
 
           - path: /ws(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: better-wellness-messaging-service
