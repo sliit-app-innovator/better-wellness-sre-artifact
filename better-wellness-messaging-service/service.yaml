@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: better-wellness-messaging-service
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 80
