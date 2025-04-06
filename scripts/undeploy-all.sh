@@ -8,9 +8,6 @@ kubectl delete -f $BASE_PATH/redis-service/ --ignore-not-found
 echo "❌ Deleting image pull secret..."
 kubectl delete -f $BASE_PATH/ecr/regcred-secret.yml --ignore-not-found
 
-echo "📛 Deleting namespace..."
-kubectl delete -f $BASE_PATH/global/namespace.yaml --ignore-not-found
-
 echo "🧹 Deleting Services..."
 kubectl delete svc better-wellness-booking-service -n better-wellness
 echo "⛔ Deleted: better-wellness-booking-service"
@@ -52,5 +49,9 @@ echo "⛔ Deleted: better-wellness-user-deployment"
 
 kubectl delete deploy better-wellness-web-app -n better-wellness
 echo "⛔ Deleted: better-wellness-web-app"
+
+
+echo "📛 Deleting namespace..."
+kubectl delete -f $BASE_PATH/global/namespace.yaml --ignore-not-found
 
 echo "✅ Undeployment complete."
