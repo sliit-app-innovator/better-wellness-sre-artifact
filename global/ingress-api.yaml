@@ -12,7 +12,7 @@ spec:
     - host: betterwellness.local
       http:
         paths:
-          - path: /better-wellness/user(/|$)(.*)
+          - path: /better-wellness/user
             pathType: Prefix
             backend:
               service:
@@ -20,7 +20,7 @@ spec:
                 port:
                   number: 80
 
-          - path: /better-wellness/booking(/|$)(.*)
+          - path: /better-wellness/booking
             pathType: Prefix
             backend:
               service:
@@ -28,7 +28,7 @@ spec:
                 port:
                   number: 80
 
-          - path: /api/chat(/|$)(.*)
+          - path: /api/chat
             pathType: Prefix
             backend:
               service:
