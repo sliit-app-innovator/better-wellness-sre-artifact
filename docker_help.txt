@@ -7,10 +7,10 @@ aws-cli/2.24.0 Python/3.12.6 Windows/11 exe/AMD64
 C:\Users\LENOVO>aws configure
 AWS Access Key ID [None]: AKIAQ4NSA2SCICKFP5HC
 AWS Secret Access Key [None]: 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
-Default region name [None]: ap-southeast-1
+Default region name [None]: ap-south-1
 Default output format [None]:
 
-C:\Users\LENOVO>aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com
+C:\Users\LENOVO>aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 061039760516.dkr.ecr.ap-south-1.amazonaws.com
 Login Succeeded
 
 
@@ -19,19 +19,19 @@ aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS
 aws ecr get-login-password --region ap-southeast-1 | kubectl create secret docker-registry ecr-regcred --docker-server=061039760516.dkr.ecr.ap-southeast-1.amazonaws.com --docker-username=AWS --docker-password="$(aws ecr get-login-password --region ap-southeast-1)" --namespace=better-wellness
 
 
-kubectl create secret docker-registry regcred `
+kubectl create ecr-regcred docker-registry regcred `
   --docker-server=061039760516.dkr.ecr.ap-southeast-1.amazonaws.com `
   --docker-username=AWS `
-  --docker-password="$(aws ecr get-login-password --region ap-southeast-1)" `
+  --docker-password="$(aws ecr get-login-password --region ap-south-1)" `
   --docker-email=your-email@example.com `
   --namespace=better-wellness
 
 
 
 docker system prune -a
-docker build -t better-wellness-webapp:latest .
-docker tag better-wellness-webapp:latest 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com/better-wellness-repo:better-wellness-webapp
-docker push 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com/better-wellness-repo:better-wellness-webapp
+docker build -t better-wellness-webappv1:latest .
+docker tag better-wellness-webappv1:latest 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-webappv1
+docker push 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-webappv1
 
 //user powershell
 kubectl delete secret ecr-regcred -n better-wellness
@@ -61,3 +61,20 @@ minikube tunnel
 kubectl apply -f .\ingress.yaml   /apply custom file
 kubectl get ingress -n better-wellness
 	
+
+
+GIT HUB : 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
+
+docker start 3314af0a3b92
+minikube start --driver=docker
+
+C:\Users\LENOVO>aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 061039760516.dkr.ecr.ap-south-1.amazonaws.com
+Login Succeeded
+
+
+aws ecr get-login-password --region ap-south-1 | \
+kubectl create secret docker-registry ecr-regcred \
+--docker-server=061039760516.dkr.ecr.ap-south-1.amazonaws.com \
+--docker-username=AWS \
+--docker-password=$(aws ecr get-login-password --region ap-south-1) \
+--namespace=better-wellness
