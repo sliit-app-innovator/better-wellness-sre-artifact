@@ -53,6 +53,6 @@ echo "⛔ Deleted: better-wellness-web-app"
 echo "📛 Deleting namespace..."
 kubectl delete -f $BASE_PATH/global/namespace.yaml --ignore-not-found
 
-kubectl delete secret ecr-regcred
+kubectl delete secret ecr-regcred -n better-wellness
 
 echo "✅ Undeployment complete."
