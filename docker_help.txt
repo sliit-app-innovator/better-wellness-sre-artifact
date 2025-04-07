@@ -33,9 +33,9 @@ docker build -t better-wellness-webappv1:latest .
 docker tag better-wellness-webappv1:latest 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-webappv1
 docker push 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-webappv1
 
-docker build -t better-wellness-user-service-v1.0.0 .
-docker tag better-wellness-user-service:v1.0.0 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-user-service-v1.0.0
-docker push 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-user-service-v1.0.0
+docker build -t better-wellness-messaging-service-v1.0.0 .
+docker tag better-wellness-messaging-service-v1.0.0 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-messaging-service-v1.0.0
+docker push 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-messaging-service-v1.0.0
 
 //user powershell
 kubectl delete secret ecr-regcred -n better-wellness
@@ -98,9 +98,10 @@ kubectl get svc better-wellness-web-app-service -n better-wellness //get externa
 EC2_PUBLIC_IP // get via console
 
 ssh -i aws-apig.pem ec2-user@43.204.221.165 -L 8080:10.107.166.215:80
-ssh -i aws-apig.pem ec2-user@43.204.221.165  -L 8081:10.107.166.215:80  -L 8082:10.111.159.251:80  -L 8083:10.100.115.64:80  -L 8084:10.100.10.121:80
+ssh -i aws-apig.pem ec2-user@13.203.66.100  -L 8081:10.105.10.198:80  -L 8082:10.104.190.114:80  -L 8083:10.109.61.143:80  -L 8084:10.106.48.242:80
 
 
+docker exec -it mysql8 mysql -u root -p
 
 minikube addons enable ingress
 
