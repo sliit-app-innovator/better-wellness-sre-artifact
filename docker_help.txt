@@ -78,3 +78,18 @@ kubectl create secret docker-registry ecr-regcred \
 --docker-username=AWS \
 --docker-password=$(aws ecr get-login-password --region ap-south-1) \
 --namespace=better-wellness
+
+
+curl http://10.103.78.178
+
+minikube tunnel
+
+
+local machine
+ssh -i your-key.pem ec2-user@<EC2_PUBLIC_IP> -L 8080:10.103.78.178:80 
+
+
+
+minikube addons enable ingress
+
+
