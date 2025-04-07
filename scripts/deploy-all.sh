@@ -3,8 +3,6 @@
 BASE_PATH="/home/ec2-user/better-wellness-sre-artifact"
 SCRIPTS_PATH="$BASE_PATH/scripts"
 
-sh setup-ecr-access.sh
-
 echo "🐘 Deploying Redis..."
 kubectl apply -f $BASE_PATH/redis-service/
 
