@@ -33,6 +33,10 @@ docker build -t better-wellness-webappv1:latest .
 docker tag better-wellness-webappv1:latest 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-webappv1
 docker push 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-webappv1
 
+docker build -t better-wellness-user-service-v1.0.0 .
+docker tag better-wellness-user-service:v1.0.0 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-user-service-v1.0.0
+docker push 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-user-service-v1.0.0
+
 //user powershell
 kubectl delete secret ecr-regcred -n better-wellness
 

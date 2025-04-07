@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: better-wellness-messaging-container
-          image: 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-messaging-service
+          image: 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-messaging-service-v1.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

@@ -15,4 +15,4 @@ kubectl apply -f ${DEPLOYMENT_FILE}
 echo "🔌 Applying Service from: ${SERVICE_FILE}"
 kubectl apply -f ${SERVICE_FILE}
 
-echo "✅ Booking service deployed and exposed successfully!"
+echo "✅ Messaging service deployed and exposed successfully!"
