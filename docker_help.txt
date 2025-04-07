@@ -20,7 +20,7 @@ aws ecr get-login-password --region ap-southeast-1 | kubectl create secret docke
 
 
 kubectl create ecr-regcred docker-registry regcred `
-  --docker-server=061039760516.dkr.ecr.ap-southeast-1.amazonaws.com `
+  --docker-server=061039760516.dkr.ecr.ap-south-1.amazonaws.com `
   --docker-username=AWS `
   --docker-password="$(aws ecr get-login-password --region ap-south-1)" `
   --docker-email=your-email@example.com `
@@ -82,11 +82,19 @@ kubectl create secret docker-registry ecr-regcred \
 
 curl http://10.103.78.178
 
-minikube tunnel
 
 
-local machine
-ssh -i your-key.pem ec2-user@<EC2_PUBLIC_IP> -L 8080:10.103.78.178:80 
+#######HOW TO set up minikube tunnel#####################
+
+# start tunnel
+minikube tunnel  // this will assign external IP for Pods
+
+kubectl get svc better-wellness-web-app-service -n better-wellness //get external ID
+
+EC2_PUBLIC_IP // get via console
+
+ssh -i aws-apig.pem ec2-user@43.204.221.165 -L 8080:10.107.166.215:80
+ssh -i aws-apig.pem ec2-user@43.204.221.165  -L 8081:10.107.166.215:80  -L 8082:10.111.159.251:80  -L 8083:10.100.115.64:80  -L 8084:10.100.10.121:80
 
 
 
