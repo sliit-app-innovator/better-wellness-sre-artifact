@@ -21,9 +21,6 @@ echo "⛔ Deleted: better-wellness-user-service"
 kubectl delete svc better-wellness-web-app-service -n better-wellness
 echo "⛔ Deleted: better-wellness-web-app-service"
 
-kubectl delete svc redis-service -n better-wellness
-echo "⛔ Deleted: redis-service"
-
 echo "🧹 Deleting ConfigMaps..."
 kubectl delete cm booking-service-config -n better-wellness
 echo "⛔ Deleted: booking-service-config"
