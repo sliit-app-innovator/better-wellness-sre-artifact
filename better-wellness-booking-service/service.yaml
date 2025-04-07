@@ -4,6 +4,7 @@ metadata:
   name: better-wellness-booking-service
   namespace: better-wellness
 spec:
+  type: LoadBalancer
   selector:
     app: better-wellness-booking-service
   ports:

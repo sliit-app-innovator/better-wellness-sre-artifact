@@ -4,6 +4,7 @@ metadata:
   name: better-wellness-user-service
   namespace: better-wellness
 spec:
+  type: LoadBalancer
   selector:
     app: better-wellness-user-service
   ports:
