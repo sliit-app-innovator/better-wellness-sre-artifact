@@ -106,3 +106,25 @@ docker exec -it mysql8 mysql -u root -p
 minikube addons enable ingress
 
 
+
+
+
+kubectl exec -it better-wellness-user-deployment-744fc6b7c5-pvn9p sh -n better-wellness
+
+
+CLOUDE +FORMATION
+
+
+aws cloudformation deploy --template-file betterwellness-vpc.yaml --stack-name betterwellness-vpc   --capabilities CAPABILITY_NAMED_IAM
+aws eks update-kubeconfig --region ap-south-1 --name betterwellness-cluster
+
+eksctl utils associate-iam-oidc-provider --region ap-south-1  --cluster betterwellness-cluster  --approve
+
+curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
+aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam-policy.json
+
+eksctl create iamserviceaccount --cluster betterwellness-cluster  --region ap-south-1   --namespace kube-system --name aws-load-balancer-controller --attach-policy-arn arn:aws:iam::061039760516:policy/AWSLoadBalancerControllerIAMPolicy --approve
+
+
+RDS
+password : qqwsG5unihkc6QQdQX9C
