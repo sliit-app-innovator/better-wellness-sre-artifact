@@ -9,7 +9,7 @@ Description: Core infrastructure for BetterWellness platform (VPC, IAM, EKS)
 Parameters:
   ClusterName:
     Type: String
-    Default: betterwellness-cluster
+    Default: sliit-better-wellness-cluster
   NodeInstanceType:
     Type: String
     Default: t3.medium
