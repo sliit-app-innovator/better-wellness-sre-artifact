@@ -4,51 +4,45 @@ metadata:
   name: better-wellness-ingress
   namespace: better-wellness
   annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:your-certificate-arn  # Optional if using HTTPS
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
 spec:
   rules:
-    - host: betterwellness.local
-      http:
+    - http:
         paths:
-          - path: /better-wellness/user(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /better-wellness/user
+            pathType: Prefix
             backend:
               service:
                 name: better-wellness-user-service
                 port:
                   number: 80
 
-          - path: /better-wellness/booking(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /better-wellness/booking
+            pathType: Prefix
             backend:
               service:
                 name: better-wellness-booking-service
                 port:
                   number: 80
 
-          - path: /api/chat(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: better-wellness-messaging-service
-                port:
-                  number: 80
-
-          - path: /ws(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: better-wellness-messaging-service
-                port:
-                  number: 80
-
-          - path: /
+          - path: /api/chat/history
             pathType: Prefix
             backend:
               service:
-                name: better-wellness-web-app-service
+                name: better-wellness-messaging-service
+                port:
+                  number: 80
+
+          - path: /ws
+            pathType: Prefix
+            backend:
+              service:
+                name: better-wellness-messaging-service
                 port:
                   number: 80
