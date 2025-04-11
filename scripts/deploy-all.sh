@@ -15,8 +15,8 @@ bash $SCRIPTS_PATH/deploy-booking-service.sh
 echo "💬 Deploying Messaging Service..."
 bash $SCRIPTS_PATH/deploy-messaging-service.sh
 
-echo "🌐 Deploying Web App..."
-bash $SCRIPTS_PATH/deploy-web-app.sh
+# echo "🌐 Deploying Web App..."
+# bash $SCRIPTS_PATH/deploy-web-app.sh
 
 # echo "🚪 Applying Ingress..."
 # kubectl apply -f $BASE_PATH/global/ingress.yaml
