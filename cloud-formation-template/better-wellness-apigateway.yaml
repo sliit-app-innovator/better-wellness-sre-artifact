@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+
+  HttpApiIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref BetterWellnessUserAPIs
+      IntegrationType: HTTP_PROXY
+      IntegrationUri: http://webhook.site/15ac616a-10de-404f-8651-6a8ff2e794ef # Replace with ALB or service URL
+      IntegrationMethod: ANY    
+      PayloadFormatVersion: '1.0'
+
+  # Routes
+  RouteUserCustomer:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessUserAPIs
+      RouteKey: ANY /user/customer
+      Target: !Join
+        - /
+        - - integrations
+          - !Ref HttpApiIntegration
+
+  RouteUserCustomerId:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessUserAPIs
+      RouteKey: ANY /user/customer/{customerId}
+      Target: !Join
+        - /
+        - - integrations
+          - !Ref HttpApiIntegration
+
+  RouteUserCounselor:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessUserAPIs
+      RouteKey: ANY /user/counselor
+      Target: !Join
+        - /
+        - - integrations
+          - !Ref HttpApiIntegration
+
+  RouteUserCounselorId:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessUserAPIs
+      RouteKey: ANY /user/counselor/{counselorId}
+      Target: !Join
+        - /
+        - - integrations
+          - !Ref HttpApiIntegration
+
+  ApiStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref BetterWellnessUserAPIs
+      StageName: $default
+      AutoDeploy: true
+  BetterWellnessUserAPIs:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: BetterWellnessUserAPI
+      ProtocolType: HTTP
