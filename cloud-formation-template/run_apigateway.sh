@@ -1,0 +1,1 @@
+aws cloudformation create-stack --stack-name BetterWellnessApiGatewayStack --template-body file://betterwellness-api-gateway.yaml --capabilities CAPABILITY_NAMED_IAM --region ap-south-1
