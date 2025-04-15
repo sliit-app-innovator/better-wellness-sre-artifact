@@ -6,6 +6,7 @@ metadata:
 data:
   application.properties: |
     # Replace with your actual properties
+    app.cors.allowed-origins=http://localhost:8080,http://localhost:8081,http://localhost:3000
     spring.application.name=betterwellness
     server.port=8080
     chat.history.ttl=604800
@@ -23,6 +24,3 @@ data:
     spring.redis.port=6379
     spring.redis.password=
     spring.redis.ssl=false
-
-    app.cors.allowed-origins=http://localhost:8080,http://localhost:8081,http://localhost:3000
-

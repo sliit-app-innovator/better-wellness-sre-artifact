@@ -6,6 +6,7 @@ metadata:
 data:
   application.properties: |
     # Replace with your actual properties
+    app.cors.allowed-origins=http://localhost:8080,http://localhost:8081,http://localhost:3000
     spring.application.name=betterwellness
     server.port=8080
     management.endpoints.web.exposure.include=health
@@ -18,6 +19,4 @@ data:
     spring.datasource.password=root
     spring.jpa.hibernate.ddl-auto = update
     spring.jpa.show-sql=true
-
-    app.cors.allowed-origins=http://localhost:8080,http://localhost:8081,http://localhost:3000
 
