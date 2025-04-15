@@ -7,12 +7,12 @@ SERVICE_FILE="${BASE_PATH}/service.yaml"
 NAMESPACE="better-wellness"
 
 echo "📦 Applying ConfigMap from: ${CONFIG_FILE}"
-kubectl apply -f ${CONFIG_FILE}
+kubectl apply -f ../better-wellness-user-service/application-config.yaml -n ${NAMESPACE}
 
 echo "🚀 Applying Deployment from: ${DEPLOYMENT_FILE}"
-kubectl apply -f ${DEPLOYMENT_FILE}
+kubectl apply -f ../better-wellness-user-service/deployment.yaml -n ${NAMESPACE}
 
 echo "🔌 Applying Service from: ${SERVICE_FILE}"
-kubectl apply -f ${SERVICE_FILE}
+kubectl apply -f ../better-wellness-user-service/service.yaml -n ${NAMESPACE}
 
 echo "✅ User service deployed and exposed successfully!"
