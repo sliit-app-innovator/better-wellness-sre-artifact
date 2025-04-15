@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: better-wellness-messaging-container
-          image: 061039760516.dkr.ecr.ap-southeast-1.amazonaws.com/better-wellness-repo:better-wellness-messaging-service
+          image: 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-messaging-service-v1.0.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -43,5 +43,13 @@ spec:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 5
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/application.properties
+              subPath: application.properties
+      volumes:
+        - name: config-volume
+          configMap:
+            name: messaging-service-config   
       imagePullSecrets:
         - name: ecr-regcred

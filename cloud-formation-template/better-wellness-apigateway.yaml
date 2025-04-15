@@ -1,0 +1,117 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+
+  BetterWellnessHttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: BetterWellnessApi
+      ProtocolType: HTTP
+
+  # --- Integrations ---
+  UserServiceIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      IntegrationType: HTTP_PROXY
+      IntegrationUri: http://webhook.site/15ac616a-10de-404f-8651-6a8ff2e794ef
+      IntegrationMethod: ANY
+      PayloadFormatVersion: '1.0'
+
+  BookingServiceIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      IntegrationType: HTTP_PROXY
+      IntegrationUri: https://webhook.site/922d9546-94e1-42e6-8cf3-1a47a7692234
+      IntegrationMethod: ANY
+      PayloadFormatVersion: '1.0'
+
+  ChatServiceIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      IntegrationType: HTTP_PROXY
+      IntegrationUri: https://webhook.site/5a37d1fd-a331-4f0f-b7bf-7800576fc084
+      IntegrationMethod: ANY
+      PayloadFormatVersion: '1.0'
+
+  # --- User Routes ---
+  RouteUserCustomer:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      RouteKey: ANY /user/customer
+      Target: !Join [ "/", [ "integrations", !Ref UserServiceIntegration ] ]
+
+  RouteUserCustomerId:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      RouteKey: ANY /user/customer/{customerId}
+      Target: !Join [ "/", [ "integrations", !Ref UserServiceIntegration ] ]
+
+  RouteUserCounselor:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      RouteKey: ANY /user/counselor
+      Target: !Join [ "/", [ "integrations", !Ref UserServiceIntegration ] ]
+
+  RouteUserCounselorId:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      RouteKey: ANY /user/counselor/{counselorId}
+      Target: !Join [ "/", [ "integrations", !Ref UserServiceIntegration ] ]
+
+  # --- Booking Routes ---
+  RouteBookingAppointment:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      RouteKey: ANY /booking/appointment
+      Target: !Join [ "/", [ "integrations", !Ref BookingServiceIntegration ] ]
+
+  RouteBookingAppointmentProxy:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      RouteKey: ANY /booking/appointment/{proxy+}
+      Target: !Join [ "/", [ "integrations", !Ref BookingServiceIntegration ] ]
+
+  RouteBookingAvailability:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      RouteKey: ANY /booking/availability
+      Target: !Join [ "/", [ "integrations", !Ref BookingServiceIntegration ] ]
+
+  RouteBookingAvailabilityProxy:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      RouteKey: ANY /booking/availability/{proxy+}
+      Target: !Join [ "/", [ "integrations", !Ref BookingServiceIntegration ] ]
+
+  # --- Chat Routes ---
+  RouteApiChatRoot:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      RouteKey: ANY /api/chat
+      Target: !Join [ "/", [ "integrations", !Ref ChatServiceIntegration ] ]
+
+  RouteApiChatProxy:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      RouteKey: ANY /api/chat/{proxy+}
+      Target: !Join [ "/", [ "integrations", !Ref ChatServiceIntegration ] ]
+
+  # --- Stage ---
+  ApiStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref BetterWellnessHttpApi
+      StageName: $default
+      AutoDeploy: true

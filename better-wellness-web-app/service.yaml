@@ -4,7 +4,7 @@ metadata:
   name: better-wellness-web-app-service
   namespace: better-wellness
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: better-wellness-web-app
   ports:

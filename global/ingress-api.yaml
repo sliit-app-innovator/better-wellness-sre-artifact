@@ -1,17 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: better-wellness-api-ingress
+  name: better-wellness-ingress
   namespace: better-wellness
   annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2  # Rewrite path to preserve the dynamic part
-    nginx.ingress.kubernetes.io/affinity: "true"  # Optional: to ensure traffic is sticky to the same pod
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:your-certificate-arn  # Optional if using HTTPS
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
 spec:
-  ingressClassName: nginx
   rules:
-    - host: api.better-wellness.local  # Different subdomain for APIs
-      http:
+    - http:
         paths:
           - path: /better-wellness/user
             pathType: Prefix
@@ -21,15 +23,23 @@ spec:
                 port:
                   number: 80
 
-          - path: /better-wellness/booking(/|$)(.*)
-            pathType: ImplementationSpecific  # Use regular expressions to match dynamic paths
+          - path: /better-wellness/booking
+            pathType: Prefix
             backend:
               service:
                 name: better-wellness-booking-service
                 port:
                   number: 80
 
-          - path: /api/chat
+          - path: /api/chat/history
+            pathType: Prefix
+            backend:
+              service:
+                name: better-wellness-messaging-service
+                port:
+                  number: 80
+
+          - path: /ws
             pathType: Prefix
             backend:
               service:
