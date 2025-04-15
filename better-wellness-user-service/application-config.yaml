@@ -5,7 +5,7 @@ metadata:
   namespace: better-wellness
 data:
   application.properties: |
-    app.cors.allowed-origins=https://dev.dlyjgh5gt9knf.amplifyapp.com
+    app.cors.allowed-origins=https://dev.*.amplifyapp.com
 
     # Replace with your actual properties
     spring.application.name=betterwellness
