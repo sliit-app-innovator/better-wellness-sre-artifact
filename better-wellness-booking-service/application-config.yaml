@@ -6,7 +6,7 @@ metadata:
 data:
   application.properties: |
     # Replace with your actual properties
-    app.cors.allowed-origins=http://localhost:8080,http://localhost:8081,http://localhost:3000
+    app.cors.allowed-origins=https://dev.*.amplifyapp.com
     spring.application.name=betterwellness
     server.port=8080
     management.endpoints.web.exposure.include=health
