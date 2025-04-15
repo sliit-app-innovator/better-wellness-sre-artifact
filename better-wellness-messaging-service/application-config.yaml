@@ -24,3 +24,5 @@ data:
     spring.redis.password=
     spring.redis.ssl=false
 
+    app.cors.allowed-origins=http://localhost:8080,http://localhost:8081,http://localhost:3000
+
