@@ -13,7 +13,7 @@ Resources:
     Properties:
       ApiId: !Ref BetterWellnessHttpApi
       IntegrationType: HTTP_PROXY
-      IntegrationUri: http://webhook.site/15ac616a-10de-404f-8651-6a8ff2e794ef
+      IntegrationUri: http://af226975787144e32a8c99ad7002e334-414598277.ap-south-1.elb.amazonaws.com/better-wellness/user
       IntegrationMethod: ANY
       PayloadFormatVersion: '1.0'
 
@@ -22,7 +22,7 @@ Resources:
     Properties:
       ApiId: !Ref BetterWellnessHttpApi
       IntegrationType: HTTP_PROXY
-      IntegrationUri: https://webhook.site/922d9546-94e1-42e6-8cf3-1a47a7692234
+      IntegrationUri: http://a9de8c37cbcda4090a5de1cd7cd4905d-388575420.ap-south-1.elb.amazonaws.com/better-wellness/booking
       IntegrationMethod: ANY
       PayloadFormatVersion: '1.0'
 
@@ -31,7 +31,7 @@ Resources:
     Properties:
       ApiId: !Ref BetterWellnessHttpApi
       IntegrationType: HTTP_PROXY
-      IntegrationUri: https://webhook.site/5a37d1fd-a331-4f0f-b7bf-7800576fc084
+      IntegrationUri: http://a8ebb8d2b454345db8d71828a361c0cf-1913399456.ap-south-1.elb.amazonaws.com/api/chat/history
       IntegrationMethod: ANY
       PayloadFormatVersion: '1.0'
 
