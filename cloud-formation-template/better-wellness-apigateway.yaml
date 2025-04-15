@@ -35,7 +35,7 @@ Resources:
       IntegrationMethod: ANY
       PayloadFormatVersion: '1.0'
 
-  # --- Proxy Routes ---
+  # --- Proxy Routes ----
   RouteUserServiceProxy:
     Type: AWS::ApiGatewayV2::Route
     Properties:
