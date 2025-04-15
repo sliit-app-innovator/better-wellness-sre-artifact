@@ -115,10 +115,9 @@ kubectl exec -it better-wellness-user-deployment-744fc6b7c5-pvn9p sh -n better-w
 CLOUDE +FORMATION
 
 
-aws cloudformation deploy --template-file better-wellness-cf.yaml --stack-name better-wellness-vpc   --capabilities CAPABILITY_NAMED_IAM
+aws cloudformation deploy --template-file better-wellness-cf.yaml --stack-name sliit-better-wellness-cluster   --capabilities CAPABILITY_NAMED_IAM
 aws eks update-kubeconfig --region ap-south-1 --name sliit-better-wellness-cluster
-
-eksctl utils associate-iam-oidc-provider --region ap-south-1  --cluster sliit-better-wellness-cluster  --approve
+eksctl utils associate-iam-oidc-provider --region ap-south-1 --cluster sliit-better-wellness-cluster --approve
 
 curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
 aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam-policy.json
