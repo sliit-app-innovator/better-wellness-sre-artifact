@@ -5,8 +5,8 @@ metadata:
   namespace: better-wellness
 data:
   application.properties: |
-    app.cors.allowed-origins=http://localhost:8080,http://localhost:8081,http://localhost:3000
-    
+    app.cors.allowed-origins=https://dev.dlyjgh5gt9knf.amplifyapp.com
+
     # Replace with your actual properties
     spring.application.name=betterwellness
     server.port=8080
