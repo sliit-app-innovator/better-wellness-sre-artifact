@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: better-wellness-user-container
-          image: 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-user-api-v2.0.0
+          image: 061039760516.dkr.ecr.ap-south-1.amazonaws.com/better-wellness-repo:better-wellness-user-service-v1.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
